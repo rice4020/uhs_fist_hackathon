@@ -3,6 +3,14 @@
 team ORI of the 1st Hackathon Contest of Hyupseongdae
 협성대학교 제1회 해커톤 참여팀 ORI 제출물
 
+서버실행
+cd C:디스크 안에 저장 위치\uhs_hackathon\hackathon_server
+node server.js
+
+플러터 web 빌드
+cd C:디스크 안에 저장 위치\uhs_hackathon\hackathon
+flutter build web --release
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.

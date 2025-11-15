@@ -2,16 +2,16 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'server_info.dart';
-import 'package:hackathon/study_together_data.dart';
 
-Future<String> studyParticipation() async {
+Future<String> userDelete(String inputUser) async {
   try{
-    final url = '$serverUrl/study/create';
+    final url = '$serverUrl/user/delete';
     final headers = {"Content-Type": "application/json"};
     final body = jsonEncode({
+      'username': inputUser,
     });
 
-    final response = await http.post(
+    final response = await http.delete(
       Uri.parse(url),
       headers: headers,
       body: body,

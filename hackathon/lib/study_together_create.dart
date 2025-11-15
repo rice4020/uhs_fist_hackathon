@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'study_together_data.dart';
-import 'package:hackathon/server_communications/study_create_api.dart';
+import 'server_communications/study_create_api.dart';
+import 'server_communications/study_participation_api.dart';
 
 class StudyTogetherCreate extends StatefulWidget {
   const StudyTogetherCreate({super.key});
@@ -118,12 +119,12 @@ class _StudyTogetherCreateState extends State<StudyTogetherCreate> {
                   if(isLoggedIn == true){                  
                     newStudyTogether.studyTogetherName = _nameController.text;
                     newStudyTogether.studyTogetherTarget = _targetController.text;
-                    newStudyTogether.startTime = _startTime.toString();
-                    newStudyTogether.endTime = _endTime.toString();
+                    newStudyTogether.startTime = '${_startTime.hour.toString().padLeft(2, '0')}:${_startTime.minute.toString().padLeft(2, '0')}';
+                    newStudyTogether.endTime = '${_endTime.hour.toString().padLeft(2, '0')}:${_endTime.minute.toString().padLeft(2, '0')}';
                     newStudyTogether.studyTogetherRequirements = _requirementsController.text;
                     newStudyTogether.studyTogetherLocation = _locationController.text;
                     String response = await studyCreate(newStudyTogether);
-                    print('버튼 눌림');
+                    print(newStudyTogether.toLineStrint());
                     if(response.startsWith('200') == false && context.mounted) {
                       await showDialog(
                         context: context,
@@ -144,6 +145,7 @@ class _StudyTogetherCreateState extends State<StudyTogetherCreate> {
                       );
                     }
                     else if (context.mounted){
+                      studyParticipation(newStudyTogether.studyTogetherName, loginUser.userId);
                       await showDialog(
                         context: context,
                         builder: (BuildContext context) {
@@ -161,6 +163,7 @@ class _StudyTogetherCreateState extends State<StudyTogetherCreate> {
                           );
                         },
                       );
+                      setState(() {});
                     }
                   }else{
                     await showDialog(
@@ -181,13 +184,7 @@ class _StudyTogetherCreateState extends State<StudyTogetherCreate> {
                       },
                     );
                   }
-                  print(newStudyTogether.studyTogetherName);
-                  print(newStudyTogether.studyTogetherTarget);
-                  print(newStudyTogether.dayOfWeek);
-                  print(newStudyTogether.startTime.toString());
-                  print(newStudyTogether.endTime.toString());
-                  print(newStudyTogether.studyTogetherRequirements);
-                  print(newStudyTogether.studyTogetherLocation);
+                  setState(() {});
                 },
                 child: Text('스터디 생성'),
               ),
