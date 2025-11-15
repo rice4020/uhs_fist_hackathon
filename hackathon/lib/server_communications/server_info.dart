@@ -1,0 +1,1 @@
+final String serverUrl = "http://localhost:3000";
