@@ -68,12 +68,16 @@ class _StudyTogetherInquiryState extends State<StudyTogetherInquiry> {
                   ''';
                   prompt += aiSearchController.text;
                   print(prompt);
-                  String result = await sendGeminiPrompt(prompt);
-                  print(result);
+                  String? result = await sendGeminiPrompt(prompt);
                   for (var study in studyTogetherList) {
                     if (result.contains(study.studyTogetherName)) {
                       aiFilteredStudyList.add(study);
                     }
+                  }
+                  if(aiFilteredStudyList.isEmpty && context.mounted){
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('참여가 가능한 스터디가 존재하지 않습니다.')),
+                    );
                   }
                   refreshData();
                   setState(() {});
@@ -117,7 +121,6 @@ class _StudyTogetherInquiryState extends State<StudyTogetherInquiry> {
                                   onPressed: () async {
                                     if(isLoggedIn){
                                       String response = await studyParticipation(study.studyTogetherName, loginUser.userId);
-                                      print(response);
                                       if(response.startsWith('200') && context.mounted) {
                                         ScaffoldMessenger.of(context).showSnackBar(
                                           SnackBar(content: Text('스터디 참여가 성공적으로 완료되었습니다.')),
@@ -133,7 +136,8 @@ class _StudyTogetherInquiryState extends State<StudyTogetherInquiry> {
                                       );
                                     }
                                   },
-                                  child:Text('참여하기'),
+                                  style: ButtonStyle(backgroundColor: WidgetStatePropertyAll<Color>(Color.fromARGB(255, 197, 255, 153))),
+                                  child: Text('참여하기'),
                                 )
                               ],
                             ),

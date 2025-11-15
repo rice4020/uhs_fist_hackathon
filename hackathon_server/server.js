@@ -197,7 +197,7 @@ app.post('/study/create', async (req, res) => {
         });
     } catch (err) {
         console.error("스터디 생성 에러:", err);
-        res.status(500).json({ error: "DB 삽입 중 오류 발생" });
+        res.status(500).json({ error: "동일한 스터디 이름이 이미 존재합니다." });
     }
 });
 

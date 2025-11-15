@@ -21,11 +21,17 @@ Future<String> sendGeminiPrompt(String prompt) async {
     ]
   });
   try {
+    print('first step');
     final response = await http.post(Uri.parse(apiUrl), headers: headers, body: body);
+    print(response.statusCode);
+    print(response.body);
+    print('second step');
     if (response.statusCode == 200) {
+      print('third step');
       final data = jsonDecode(response.body);
+      print('fourth step');
       print(data);
-      return data['candidates'][0]['content']['parts'][0]['text'];
+      return data['candidates'][0]['content']['parts'][0]['text'] ?? "";
     } else {
       return "실패: ${response.statusCode} ${response.body}";
     }

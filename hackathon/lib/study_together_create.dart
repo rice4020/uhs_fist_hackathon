@@ -76,7 +76,7 @@ class _StudyTogetherCreateState extends State<StudyTogetherCreate> {
                       });
                     }
                   ),
-                  Spacer(flex: 1,),
+                  Spacer(flex: 3,),
                   Text("시작 시간 : "),
                   Spacer(flex: 1,),
                   OutlinedButton.icon(
@@ -89,7 +89,7 @@ class _StudyTogetherCreateState extends State<StudyTogetherCreate> {
                     label: Text('${_startTime.hour.toString().padLeft(2, '0')}:${_startTime.minute.toString().padLeft(2, '0')}',
                     ),
                   ),
-                  Spacer(flex: 1,),
+                  Spacer(flex: 3,),
                   Text("종료 시간 : "),
                   Spacer(flex: 1,),
                   OutlinedButton.icon(

@@ -30,7 +30,9 @@ class _StudyTogetherMainState extends State<StudyTogetherMain> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: isLoggedIn == false ? Center(child: Text('로그인이 필요합니다.')):FutureBuilder(
+      child: studyTogetherList.isEmpty 
+      ?(isLoggedIn == true ? Center(child: Text('참여한 스터디가 없습니다.')): Center(child: Text('로그인이 필요합니다.')))
+      :FutureBuilder(
         future: studyParticipationList(loginUser.userId),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -43,11 +45,6 @@ class _StudyTogetherMainState extends State<StudyTogetherMain> {
               itemCount: studyTogetherList.length,
               itemBuilder: (context, index) {
                 final study = studyTogetherList[index];
-                if(studyTogetherList.isEmpty){
-                  return Center(
-                    child:Text('참여한 스터디가 없습니다.') ,
-                  );
-                }
                 return Container(
                   margin: EdgeInsets.all(MediaQuery.of(context).size.height * 0.05),
                   child: Card(
@@ -86,6 +83,7 @@ class _StudyTogetherMainState extends State<StudyTogetherMain> {
                               }
                               setState(() {});
                             },
+                            style: ButtonStyle(backgroundColor: WidgetStatePropertyAll<Color>(Color.fromARGB(255, 197, 255, 153))),
                             child:Text('탈퇴하기'),
                           )
                         ],

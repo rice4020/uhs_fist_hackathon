@@ -6,6 +6,8 @@ team ORI of the 1st Hackathon Contest of Hyupseongdae
 서버실행
 cd C:디스크 안에 저장 위치\uhs_hackathon\hackathon_server
 node server.js
+chrome, edge에서 (http://localhost:3000/)
+
 
 플러터 web 빌드
 cd C:디스크 안에 저장 위치\uhs_hackathon\hackathon
